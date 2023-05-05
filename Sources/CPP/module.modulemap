@@ -1,0 +1,5 @@
+module Ansi2HtmlCpp {
+    header "include/Ansi2HtmlBridge.h"
+    link "Ansi2HtmlCpp"
+    export *
+}
