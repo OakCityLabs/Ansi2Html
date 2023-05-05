@@ -17,8 +17,8 @@ final class Ansi2HtmlTests: XCTestCase {
         
         let input = "background color".backgroundColor(.green)
         let output = """
-<body style="background-color:#111111;font-family:'Consolas','Droid Sans Mono',monospace; color:#eeeeee; white-space:pre"><span style="background-color:#39b54a">background color</span></body>
-"""
+        <span style="background-color:#39b54a">background color</span>
+        """
         
         XCTAssertNoDifference(input.ansiToHtml, output)
     }

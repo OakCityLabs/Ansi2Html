@@ -104,7 +104,8 @@ std::string ANSI_SGR2HTML::impl::parse(std::string_view raw_data, bool strict)
     std::string param_bytes_buf;
     out_s.reserve(raw_data.size()); //very approximate reservation
     //NOTE: Use apostrophes ' not quotes " inside style quotation marks!
-    out_s.append(R"(<body style="background-color:#111111;font-family:'Consolas','Droid Sans Mono',monospace; color:#eeeeee; white-space:pre">)");
+    // WJL -- don't do the body stuff for Callisto
+//    out_s.append(R"(<body style="background-color:#111111;font-family:'Consolas','Droid Sans Mono',monospace; color:#eeeeee; white-space:pre">)");
     bool esc_set = false;
     bool csi_set = false;
     for(const char& c : raw_data) {
@@ -155,7 +156,8 @@ std::string ANSI_SGR2HTML::impl::parse(std::string_view raw_data, bool strict)
         appendHTMLSymbol(c, out_s);                  //default
     }
     resetAll(out_s);                                //closes remaining tags
-    out_s.append("</body>");
+    // WJL - no body for Callisto
+//    out_s.append("</body>");
     return out_s;
 }
 
