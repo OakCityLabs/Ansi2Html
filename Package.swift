@@ -39,8 +39,7 @@ let package = Package(
                 "Ansi2Html",
                 "Ansi2HtmlCpp",
                 .product(name: "ColorizeSwift", package: "ColorizeSwift"),
-
-//                .product(name: "CustomDump", package: "swift-custom-dump"),
+                .product(name: "CustomDump", package: "swift-custom-dump"),
             ]),
     ],
     cxxLanguageStandard: .cxx17
