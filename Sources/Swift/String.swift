@@ -7,10 +7,14 @@
 
 import Foundation
 
-extension String {
+public extension String {
     
     var ansiToHtml: String {
         AnsiAttributedStringBuilder().stringToHtml(self)
+    }
+    
+    var hasAnsi: Bool {
+        AnsiAttributedStringBuilder().stringHasAnsi(self)
     }
 
 }

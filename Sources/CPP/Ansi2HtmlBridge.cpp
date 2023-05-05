@@ -18,10 +18,6 @@ extern "C" const char* htmlStr(const char* input)
     ANSI_SGR2HTML ansisgr2html;
     std::string inputStdStr(input);
     std::string html = ansisgr2html.simpleParse(inputStdStr);
-    const char* htmlC = strdup(html.c_str());
+    const char* htmlC = strdup(html.c_str());           // Allocate memory for a copy so it's not immediately released.
     return htmlC;
-//    return html.c_str();
-    
-//    std::string ansi = "\x1b[48;5;141m background color \x1b[49m";
-//    std::string html = ansisgr2html.simpleParse(ansi);
 }
