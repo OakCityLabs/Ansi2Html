@@ -5,11 +5,13 @@ import CustomDump
 
 final class Ansi2HtmlTests: XCTestCase {
     
+    let builder = AnsiAttributedStringBuilder()
+    
     func testPlainString() throws {
         
         let input = "Hello World!"
         let output = "Hello World!"
-        let html = input.ansiToHtml
+        let html = builder.stringToHtml(input)
         XCTAssertNoDifference(html, output)
     }
     
@@ -20,13 +22,13 @@ final class Ansi2HtmlTests: XCTestCase {
         <span style="background-color:#39b54a">background color</span>
         """
         
-        XCTAssertNoDifference(input.ansiToHtml, output)
+        XCTAssertNoDifference(builder.stringToHtml(input), output)
     }
     
     func testHasAnsi() throws {
-        XCTAssertFalse("Hello World!".hasAnsi)
-        XCTAssertTrue("Hello World!".bold().hasAnsi)
-        XCTAssertTrue("Awful combination".colorize(.yellow, background: .red).hasAnsi)
-        XCTAssertFalse("Awful combination".colorize(.yellow, background: .red).uncolorized().hasAnsi)
+        XCTAssertFalse(builder.stringHasAnsi("Hello World!"))
+        XCTAssertTrue(builder.stringHasAnsi("Hello World!".bold()))
+        XCTAssertTrue(builder.stringHasAnsi("Awful combination".colorize(.yellow, background: .red)))
+        XCTAssertFalse(builder.stringHasAnsi("Awful combination".colorize(.yellow, background: .red).uncolorized()))
     }
 }

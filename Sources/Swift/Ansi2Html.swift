@@ -10,7 +10,7 @@ import Foundation
 public struct AnsiAttributedStringBuilder {
     
     public func stringToHtml(_ str: String) -> String {
-        guard str.hasAnsi else { return str }
+        guard stringHasAnsi(str) else { return str }
         
         let html = str.withCString { ptr in
             let htmlC = htmlStr(ptr)                // Get the cString
