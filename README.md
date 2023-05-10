@@ -14,7 +14,7 @@ You can create a string builder and use the conversion method directly on the bu
 ```swift
 import Ansi2Html
 
-let builder = AnsiAttributedStringBuilder()
+let builder = AnsiHtmlStringBuilder()
 
 if builder.stringHasAnsi(stringWithAnsiCodes) {
     let html = builder.stringToHtml(stringWithAnsiCodes)
@@ -28,7 +28,7 @@ It may be more useful to add an extension on string for convenience.
 ```swift
 import Ansi2Html
 
-private let builder = AnsiAttributedStringBuilder()
+private let builder = AnsiHtmlStringBuilder()
 
 extension String {
     

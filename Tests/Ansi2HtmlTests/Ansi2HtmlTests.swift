@@ -5,7 +5,7 @@ import CustomDump
 
 final class Ansi2HtmlTests: XCTestCase {
     
-    let builder = AnsiAttributedStringBuilder()
+    let builder = AnsiHtmlStringBuilder()
     
     func testPlainString() throws {
         

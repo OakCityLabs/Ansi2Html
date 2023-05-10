@@ -1,5 +1,5 @@
 //
-//  AnsiAttributedStringBuilder.swift
+//  AnsiHtmlStringBuilder.swift
 //
 //
 //  Created by Jay Lyerly on 5/5/23.
@@ -12,7 +12,7 @@
 import Ansi2HtmlCpp
 import Foundation
 
-public struct AnsiAttributedStringBuilder {
+public struct AnsiHtmlStringBuilder {
     
     public init() { }       // make this explicitly public
     
