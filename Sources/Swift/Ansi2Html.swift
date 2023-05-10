@@ -1,7 +1,12 @@
-// The Swift Programming Language
-// https://docs.swift.org/swift-book
+//
+//  AnsiAttributedStringBuilder.swift
+//
+//
+//  Created by Jay Lyerly on 5/5/23.
+//
 
-// Actual conversion is handled by code from this repo, manually copied into this project
+
+// Actual conversion is handled by code from this repo, manually copied into this project on 2023/5/5
 // https://github.com/pozemka/ANSIEsc2HTML
 
 import Ansi2HtmlCpp
@@ -12,8 +17,6 @@ public struct AnsiAttributedStringBuilder {
     public init() { }       // make this explicitly public
     
     public func stringToHtml(_ str: String) -> String {
-        guard stringHasAnsi(str) else { return str }
-        
         let html = str.withCString { ptr in
             let htmlC = htmlStr(ptr)                // Get the cString
             let html = String(cString: htmlC!)      // Create a Swift string by copying the bytes of the cString

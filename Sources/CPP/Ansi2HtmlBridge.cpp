@@ -7,12 +7,6 @@
 
 #include "ansi_esc2html.h"
 
-// extern "C" will cause the C++ compiler
-// (remember, this is still C++ code!) to
-// compile the function in such a way that
-// it can be called from C
-// (and Swift).
-
 extern "C" const char* htmlStr(const char* input)
 {
     ANSI_SGR2HTML ansisgr2html;
