@@ -9,6 +9,8 @@ import Foundation
 
 public struct AnsiAttributedStringBuilder {
     
+    public init() { }       // make this explicitly public
+    
     public func stringToHtml(_ str: String) -> String {
         guard stringHasAnsi(str) else { return str }
         
