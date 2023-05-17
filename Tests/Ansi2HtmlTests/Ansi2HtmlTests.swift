@@ -31,4 +31,22 @@ final class Ansi2HtmlTests: XCTestCase {
         XCTAssertTrue(builder.stringHasAnsi("Awful combination".colorize(.yellow, background: .red)))
         XCTAssertFalse(builder.stringHasAnsi("Awful combination".colorize(.yellow, background: .red).uncolorized()))
     }
+    
+    func testBackgroundColorCloseSpan() throws {
+        let input = "Hello World!".backgroundColor(.red)
+        let html = builder.stringToHtml(input)
+        
+        let expectedHtml = #"<span style="background-color:#ff0000">Hello World!</span>"#
+        
+        XCTAssertNoDifference(html, expectedHtml)
+    }
+    
+    func testForegroundColor() throws {
+        let input = "Hello World!".foregroundColor(.purple)
+        let html = builder.stringToHtml(input)
+
+        let expectedHtml = ##"<span style="color: #762671;">Hello World!</span>"##
+
+        XCTAssertNoDifference(html, expectedHtml)
+    }
 }

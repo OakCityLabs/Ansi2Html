@@ -60,7 +60,7 @@ private:
         "</i>",
         "</u>",
         "</s>",
-        "</font>",
+        "</span>",
         "</span>"
     };
     
@@ -72,7 +72,7 @@ private:
         "<i>",
         "<u>",
         "<s>",
-        "<font>",
+        "<span>",
         "<span>"
     };
 
@@ -258,36 +258,36 @@ void ANSI_SGR2HTML::impl::processSGR(SGRParts&& sgr_parts/*is rvalue ref any goo
             // OPTIMIZATION: foreground and background cases are very similar. Extract them as function?
 //            static const std::string_view font_color_tag{R"(<font color=")"};
 //            out.append(font_color_tag); // OPTIMIZATION: const char* can be replaced with string_view
-            out.append(R"(<font color=")");
+            out.append(R"(<span style="color: )");
             out.append(decodeColor256(sgr_parts[2]));
-            out.append(R"(">)");
+            out.append(R"(;">)");
             sgr_parts.erase(sgr_parts.begin(), sgr_parts.begin() + 3);
             if(strict) {
                 std::string ts;
                 ts.reserve(22);
-                ts.append(R"(<font color=")");
+                ts.append(R"(<span style="color: )");
                 ts.append(decodeColor256(sgr_parts[2]));
-                ts.append(R"(">)");
+                ts.append(R"(;">)");
                 string_stack_all_.push_back(ts);
             } 
             stack_all_.push_back(Tag::FG_COLOR);
             counter_fg_color_++;
             // 24-bit foreground color //38;2;⟨r⟩;⟨g⟩;⟨b⟩
         } else if (2 == sgr_parts[1] && sgr_parts.size() >= 5) {
-            out.append(R"(<font color="#)");
+            out.append(R"(<span style="color: #)");
             appendHexNumber(sgr_parts[2], out);
             appendHexNumber(sgr_parts[3], out);
             appendHexNumber(sgr_parts[4], out);
-            out.append(R"(">)");
+            out.append(R"(;">)");
             sgr_parts.erase(sgr_parts.begin(), sgr_parts.begin() + 5);
             if(strict) {
                 std::string ts;
                 ts.reserve(22);
-                ts.append(R"(<font color="#)");
+                ts.append(R"(<span style="color: #)");
                 appendHexNumber(sgr_parts[2], ts);
                 appendHexNumber(sgr_parts[3], ts);
                 appendHexNumber(sgr_parts[4], ts);
-                ts.append(R"(">)");
+                ts.append(R"(;">)");
                 string_stack_all_.push_back(ts);
             } 
             stack_all_.push_back(Tag::FG_COLOR);
@@ -343,15 +343,15 @@ void ANSI_SGR2HTML::impl::processSGR(SGRParts&& sgr_parts/*is rvalue ref any goo
                 (90 <= sgr_code && 97 >= sgr_code)
            ) {                                              // foreground color from table
             // For now using <font color> instead of <span style>. It is little shorter and should not break in most of cases.
-            out.append(R"(<font color=")");                 // Not very beautilful string construction. Can use {fmt} or wait for С++20 with eel.is/c++draft/format.
+            out.append(R"(<span style="color: )");                 // Not very beautilful string construction. Can use {fmt} or wait for С++20 with eel.is/c++draft/format.
             out.append(decodeColorBasic(sgr_code));
-            out.append(R"(">)");
+            out.append(R"(;">)");
             if(strict) {
                 std::string ts;
                 ts.reserve(22);
-                ts.append(R"(<font color=")");
+                ts.append(R"(<span style="color: )");
                 ts.append(decodeColorBasic(sgr_code));
-                ts.append(R"(">)");
+                ts.append(R"(;">)");
                 string_stack_all_.push_back(ts);
             } 
             stack_all_.push_back(Tag::FG_COLOR);
